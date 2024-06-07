@@ -25,8 +25,8 @@ const LoginP = () => {
             });
             console.log('Account creation successful. User:', response.user);
 
-            // You can navigate to a different page or show a success message here
-            navigate('/'); // Redirect to home or another page after successful sign-up
+           
+           
         } catch (error: any) {
             setError(error.message);
         }

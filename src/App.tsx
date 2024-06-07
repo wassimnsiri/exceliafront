@@ -5,7 +5,7 @@ import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
-import Calendar from './pages/Calendar';
+
 import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
 import FormElements from './pages/Form/FormElements';
@@ -17,6 +17,7 @@ import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import LoginInterface from './pages/Users/LoginInterface';
 import Form from './pages/Form';
+import FoemLayout from './pages/Calendar';
 
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
           element={
             <>
               <PageTitle title="Calendar | Excelia  " />
-              <Calendar />
+              <FoemLayout />
             </>
           }
         />

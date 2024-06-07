@@ -15,9 +15,56 @@ import SelectGroupTwo from '../../components/Forms/SelectGroup/SelectGroupTwo';
 import MultiSelect from '../../components/Forms/MultiSelect';
 
 const FormElements = () => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = {
+      defaultInput: (event.currentTarget.elements.namedItem('defaultInput') as HTMLInputElement).value,
+      activeInput: (event.currentTarget.elements.namedItem('activeInput') as HTMLInputElement).value,
+      disabledInput: (event.currentTarget.elements.namedItem('disabledInput') as HTMLInputElement).value,
+      switcherOne: (event.currentTarget.elements.namedItem('switcherOne') as HTMLInputElement).checked,
+      switcherTwo: (event.currentTarget.elements.namedItem('switcherTwo') as HTMLInputElement).checked,
+      switcherThree: (event.currentTarget.elements.namedItem('switcherThree') as HTMLInputElement).checked,
+      switcherFour: (event.currentTarget.elements.namedItem('switcherFour') as HTMLInputElement).checked,
+      datePickerOne: (event.currentTarget.elements.namedItem('datePickerOne') as HTMLInputElement).value,
+      datePickerTwo: (event.currentTarget.elements.namedItem('datePickerTwo') as HTMLInputElement).value,
+      fileUpload: (event.currentTarget.elements.namedItem('fileUpload') as HTMLInputElement).files?.[0].name || '',
+      defaultTextarea: (event.currentTarget.elements.namedItem('defaultTextarea') as HTMLTextAreaElement).value,
+      activeTextarea: (event.currentTarget.elements.namedItem('activeTextarea') as HTMLTextAreaElement).value,
+      disabledTextarea: (event.currentTarget.elements.namedItem('disabledTextarea') as HTMLTextAreaElement).value,
+      checkboxOne: (event.currentTarget.elements.namedItem('checkboxOne') as HTMLInputElement).checked,
+      checkboxTwo: (event.currentTarget.elements.namedItem('checkboxTwo') as HTMLInputElement).checked,
+      checkboxThree: (event.currentTarget.elements.namedItem('checkboxThree') as HTMLInputElement).checked,
+      checkboxFour: (event.currentTarget.elements.namedItem('checkboxFour') as HTMLInputElement).checked,
+      checkboxFive: (event.currentTarget.elements.namedItem('checkboxFive') as HTMLInputElement).checked,
+      selectGroup: (event.currentTarget.elements.namedItem('selectGroup') as HTMLSelectElement).value,
+      multiSelect: Array.from((event.currentTarget.elements.namedItem('multiSelect') as HTMLSelectElement).selectedOptions).map(option => option.value),
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/user/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Form submitted successfully:', result);
+      } else {
+        console.error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Form Elements" />
+      <form onSubmit={handleSubmit}>
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
@@ -199,6 +246,8 @@ const FormElements = () => {
           </div>
         </div>
       </div>
+      <button type="submit">Submit</button>
+      </form>
     </DefaultLayout>
   );
 };

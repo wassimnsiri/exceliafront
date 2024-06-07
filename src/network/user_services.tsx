@@ -49,16 +49,9 @@ export const fetchUserData = async () => {
       }
   
       const data = await response.json();
-      
+      window.location.href = 'http://localhost:5173/';
       // Handle redirection based on user role
-      const { token, user } = data;
-      if (user.role === 'admin') {
-        window.location.href = 'http://localhost:5173/';
-      } else if (user.role === 'gerant') {
-        window.location.href = 'http://localhost:5173/welcome';
-      } else {
-        // handle other roles or default redirection
-      }
+   
   
       return data;
     } catch (error) {
